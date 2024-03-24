@@ -1,0 +1,31 @@
+@function sum($numbers...) {
+  $sum: 0;
+  @each $number in $numbers {
+    $sum: $sum + $number;
+  }
+  @return $sum;
+}
+
+@function subs($numbers...) {
+  $subs: 0;
+  @each $number in $numbers {
+    $subs: $subs - $number;
+  }
+  @return $subs;
+}
+
+@function min($numbers...) {
+  $min: get-first($numbers);
+
+  @each $number in $numbers {
+    @if $min > $number {
+      $min: $number;
+    }
+  }
+  
+  @return $min;
+}
+
+@function to-uppercase($str) {
+  @return string.upcase($str);
+}

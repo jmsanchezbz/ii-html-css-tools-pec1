@@ -1,0 +1,251 @@
+@use "../mixins";
+
+/**
+  * Declaration order:
+  * 1.Positioning
+  * 2.Box model
+  * 3.Typography
+  * 4.Visual
+  */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  //height: 100vh;
+  font-family: $font-family-sans-serif;
+  color: #222222;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-family-serif;
+}
+
+h1 {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  margin-top: 2.8rem;
+  margin-bottom: 2rem;
+  font-weight: bolder;
+  color: black;
+}
+
+h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+section {
+  header {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/*article {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}*/
+
+.article__details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
+
+.article__button {
+  display: inline-block;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: white;
+  text-decoration: none; // Remove default underline
+  background-color: black;
+
+  &:hover {
+    background-color: #333333;
+  }
+}
+
+.container {
+  width: 100%;
+  //padding: 2rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.header {
+  color: white;
+  background-color: black;
+
+  a {
+    color: white;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  @media (min-width: $tabletMinWidth) {
+    max-width: none;
+  }
+}
+
+.footer {
+  color: white;
+  background-color: black;
+
+  a {
+    color: white;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
+
+.grp-activities {
+  width:90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.activities {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+
+  figure {
+    position: relative;
+    width: 50%;
+    max-width: 240px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+
+    figcaption {
+      position: absolute;
+      bottom: 15px;
+      left: 10px;
+
+      a {
+        color: white;
+        text-decoration: none;
+
+        &::after {
+          margin-right: 10px;
+          margin-left: 10px;
+          content: ">";
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  display: block;
+  max-width: 100px;
+  height: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+}
+
+.white {
+  color: white;
+}
+
+.social-links {
+  ul li {
+    display: inline-block;
+    margin: 5px;
+  }
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+
+  &.img-fluid {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.image {
+  position: relative;
+
+  .meta {
+    position: absolute;
+    bottom: 4px;
+    padding: 5px;
+    font: 0.8rem;
+    background-color: white;
+    opacity: 0.7;
+  }
+}
+
+%ul-link--nostyle {
+  ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    flex-shrink: 0;
+    align-self: flex-start;
+    list-style: none;
+    //display: inline-block;
+    @include mixins.hover-underline;
+  }
+
+  a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+}
+
+nav {
+  @extend %ul-link--nostyle;
+}
+
+.link-list {
+  @extend %ul-link--nostyle;
+}
+
+.welcome {
+  background-color: yellow;
+}
+
+.things-to-do {
+  background-color: aquamarine;
+}
+
+.taste-nz {
+  background-color: coral;
+}
+
+.exp-nature {
+  background-color: darkcyan;
+}
