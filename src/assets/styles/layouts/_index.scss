@@ -1,4 +1,9 @@
-@use "../mixins";
+@use "../mixins" as m;
+@use "../functions" as f;
+
+@import "header";
+@import "footer";
+
 
 /**
   * Declaration order:
@@ -7,6 +12,7 @@
   * 3.Typography
   * 4.Visual
   */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,7 +21,6 @@
 body {
   display: flex;
   flex-direction: column;
-  //height: 100vh;
   font-family: $font-family-sans-serif;
   color: #222222;
 }
@@ -27,7 +32,6 @@ h3 {
 }
 
 h1 {
-  margin-top: 3rem;
   margin-bottom: 2rem;
 }
 
@@ -45,79 +49,125 @@ h3 {
 
 section {
   header {
-    padding-left: 20px;
     padding-top: 20px;
+    padding-right: 20px;
     padding-bottom: 20px;
+    padding-left: 20px;
+    border-bottom: 1px solid black;
+  }
+
+  .content {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
   }
 }
 
-/*article {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}*/
-
-.article__details {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding-inline: 20px;
-  margin-inline: auto;
-}
-
-.article__button {
-  display: inline-block;
-  flex-shrink: 0;
-  align-self: flex-start;
-  padding: 10px;
-  margin-bottom: 20px;
-  color: white;
-  text-decoration: none; // Remove default underline
-  background-color: black;
+a {
+  color: $anchor-color;
+  text-decoration: underline;
 
   &:hover {
-    background-color: #333333;
+    color: f.generate-shade(black, 90%);
+    text-decoration: double;
   }
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.article {
+  @media (min-width: $tabletMinWidth) {
+    flex: 0 0 50%;
+  }
+
+  @media (min-width: $desktopMinWidth) {
+    flex: 0 0 40%;
+  }
+
+  .article__image {
+    position: relative;
+    height: 100%;
+
+    .meta {
+      position: absolute;
+      bottom: 4px;
+      padding: 5px;
+      font-size: 0.9rem;
+      background-color: white;
+      opacity: 0.7;
+    }
+
+    @media (min-width: $tabletMinWidth) {
+      flex: 0 0 50%;
+      padding-top: 80px;
+
+      img {
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    @media (min-width: $desktopMinWidth) {
+      flex: 0 0 60%;
+    }
+  }
+
+  .article__details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-inline: 20px;
+    margin-inline: auto;
+  }
+
+  .article__button {
+    display: inline-block;
+    flex-shrink: 0;
+    align-self: flex-start;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    text-decoration: none; // Remove default underline
+    background-color: black;
+
+    &:hover {
+      background-color: #333333;
+    }
+  }
+
+  @media (min-width: $tabletMinWidth) {
+    display: flex;
+    padding-bottom: 20px;
+  }
+
+  @media (min-width: $desktopMinWidth) {
+    display: flex;
+  }
+}
+
+.cover {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  background-image: url("../images/wellington.jpg");
+  background-repeat: no-repeat;
+  background-position: center bottom 68%;
+  background-size: cover;
 }
 
 .container {
   width: 100%;
-  //padding: 2rem;
   margin: 0 auto;
   text-align: left;
 }
 
-.header {
-  color: white;
-  background-color: black;
-
-  a {
-    color: white;
-  }
-
-  .container {
-    padding: 20px;
-  }
-
-  @media (min-width: $tabletMinWidth) {
-    max-width: none;
-  }
-}
-
-.footer {
-  color: white;
-  background-color: black;
-
-  a {
-    color: white;
-  }
-
-  .container {
-    padding: 20px;
-  }
-}
-
 .grp-activities {
-  width:90%;
+  width: 90%;
   margin-right: auto;
   margin-left: auto;
 }
@@ -170,9 +220,18 @@ section {
 }
 
 .social-links {
-  ul li {
-    display: inline-block;
-    margin: 5px;
+  ul {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: flex-start;
+    padding-left: 20px;
+    list-style: none;
+
+    @media (min-width: $tabletMinWidth) {
+      padding-inline-start: 0;
+      padding-left: 0;
+    }
   }
 }
 
@@ -186,25 +245,13 @@ img {
   }
 }
 
-.image {
-  position: relative;
-
-  .meta {
-    position: absolute;
-    bottom: 4px;
-    padding: 5px;
-    font: 0.8rem;
-    background-color: white;
-    opacity: 0.7;
-  }
-}
-
 %ul-link--nostyle {
   ul {
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
+    border-left: 1px solid white;
   }
 
   li {
@@ -212,7 +259,7 @@ img {
     align-self: flex-start;
     list-style: none;
     //display: inline-block;
-    @include mixins.hover-underline;
+    @include m.hover-underline;
   }
 
   a {
